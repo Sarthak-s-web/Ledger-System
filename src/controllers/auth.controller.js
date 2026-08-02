@@ -1,5 +1,6 @@
 const userModel = require("../models/user.models")
 const jwt = require("jsonwebtoken")
+const emailService = require("../services/email.services")
 
 /**
  * - user register
@@ -23,7 +24,10 @@ async function userRegisterController(req,res){
         email , password ,name
     })
 
-    const token =jwt.sign({userID: user._id}, process.env.JWT_SECRET, {expiresIn:"3d"})
+    const token =jwt.sign({
+        userID: user._id}, 
+        process.env.JWT_SECRET, 
+        {expiresIn:"3d"})
 
     res.cookie("token", token)
 
@@ -35,6 +39,8 @@ async function userRegisterController(req,res){
         },
         token
     })
+
+    await emailService.sendRegistrationEmail(user.email, user.name)
 }
 
 
@@ -48,7 +54,7 @@ async function loginController(req, res){
 
     if(!user)
     {
-        res.status(401).json({
+        return res.status(401).json({
             message:"Email or password is incorrect"
         })
     }
@@ -56,7 +62,7 @@ async function loginController(req, res){
     const isValid= await user.comparePassword(password)
     if(!isValid)
     {
-        res.status(401).json({
+        return res.status(401).json({
             message:"Email or password is incorrect"
         })
     }
