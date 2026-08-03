@@ -41,13 +41,53 @@ const sendEmail = async (to, subject, text, html) => {
 };
 
 const sendRegistrationEmail = async (userEmail, name) => {
-const subject = "Welcome to Backend Ledger";
-const text = `Hello ${name}, \n\nThank you for registration at Backend Ledger. We are excited to have you on board!\n\n Best regards,\n The Backend Ledger team.`;
-const html = `<p>Hello ${name},</p><p>Thank you for registration at Backend Ledger.We are excited to have you on board!</p><p>Best regards,<br> The Backend Ledger team.</p>`;
+const subject = "Welcome to LedgerFlow";
+
+const text = `Hello ${name}, \n\nThank you for registration at LedgerFlow. We are excited to have you on board!\n\n Best regards,\n The LedgerFlow team.`;
+
+const html = `<p>Hello ${name},</p><p>Thank you for registration at LedgerFlow.We are excited to have you on board!</p><p>Best regards,<br> The LedgerFlow team.</p>`;
 
 await sendEmail(userEmail, subject, text, html);
 };
 
+const SendTransactionEmail = async (userEmail, name, amount, toAccount) => {
+    const subject = "Transaction Successful - LedgerFlow";
+
+    const text = `Hello ${name},
+
+Your transaction has been completed successfully.
+
+Transaction Details:
+- Amount: ₹${amount}
+- Sent To: ${toAccount}
+
+Thank you for using LedgerFlow.
+
+Best regards,
+The LedgerFlow Team`;
+
+    const html = `
+        <h2>Transaction Successful</h2>
+        <p>Hello <strong>${name}</strong>,</p>
+
+        <p>Your transaction has been completed successfully.</p>
+
+        <h3>Transaction Details</h3>
+        <ul>
+            <li><strong>Amount:</strong> ₹${amount}</li>
+            <li><strong>Sent To:</strong> ${toAccount}</li>
+        </ul>
+
+        <p>Thank you for using <strong>LedgerFlow</strong>.</p>
+
+        <p>Best regards,<br>
+        <strong>The LedgerFlow Team</strong></p>
+    `;
+
+    await sendEmail(userEmail, subject, text, html);
+};
+
 module.exports = {
-    sendRegistrationEmail
+  sendRegistrationEmail,
+  SendTransactionEmail
 }

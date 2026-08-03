@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-const { findOneAndUpdate } = require("./user.models")
 
 const ledgerSchema = new mongoose.Schema({
     account:{
