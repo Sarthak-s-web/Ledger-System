@@ -20,7 +20,7 @@ app.use(cookieParser())
  */
 app.use("/api/auth",authRouter)
 app.use("/api/account",accountRouter)
-app.use("/api/account",transactionRoutes)
+app.use("/api/transactions",transactionRoutes)
 
 
 module.exports = app
