@@ -19,7 +19,7 @@ app.use(cookieParser())
  * - Use Routes
  */
 app.use("/api/auth",authRouter)
-app.use("/api/account",accountRouter)
+app.use("/api/accounts",accountRouter)
 app.use("/api/transactions",transactionRoutes)
 
 

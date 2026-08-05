@@ -20,4 +20,7 @@ transactionRoutes.post("/", authMiddleware.authMiddleware, transactionController
 
 transactionRoutes.post("/system/initial-funds", authMiddleware.authSystemUserMiddleware, transactionController.createInitialFundsTransaction)
 
+
+
+
 module.exports = transactionRoutes;
